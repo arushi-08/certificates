@@ -1,0 +1,78 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.certificate-actions-text {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+}
+
+.certificate-actions-text a {
+    margin: 0 15px;
+    color: #555;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.certificate-actions-text a:hover {
+    color: #000;
+}
+
+.certificate-actions-text a i {
+    margin-right: 8px;
+    color: #777;
+}
+
+#recipient-name {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #6c757d;
+    margin: 20px 0;
+}
+
+#recipient-name strong {
+    font-weight: 700;
+    color: #333;
+}
+
+.details-card {
+    margin-top: 30px;
+}
+
+.share-card {
+    text-align: center;
+    padding: 30px;
+}
+
+.share-card .card-title {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.share-icons a {
+    margin: 0 10px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.share-icons a:hover {
+    transform: translateY(-3px);
+}
+
+.share-icons a .fa-linkedin-in { color: #0077b5; }
+.share-icons a .fa-twitter { color: #1da1f2; }
+.share-icons a .fa-whatsapp { color: #25d366; }
+.share-icons a .fa-pinterest { color: #e60023; }
+.share-icons a .fa-envelope { color: #777; }
+.share-icons a .fa-share-alt { color: #555; } 

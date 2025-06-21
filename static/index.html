@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification</title>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Import Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="white">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo black-text"><img src="NLP logo.jpg" alt="Logo" style="height: 50px; vertical-align: middle;"></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
+                <!-- Intentionally empty. Title is moved below certificate. -->
+            </div>
+        </div>
+
+        <!-- Certificate Display -->
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <div class="card-panel" style="padding: 0;">
+                    <img id="certificate-image" src="" style="width: 100%; display: block;" alt="Certificate Image">
+                    <h3 id="recipient-name" class="center-align"></h3>
+                    <div class="certificate-actions-text">
+                        <a href="#" id="action-share"><i class="fas fa-share-alt"></i> Share</a>
+                        <a href="#" id="action-download" download><i class="fas fa-file-pdf"></i> Download</a>
+                        <a href="#" id="action-add-to-profile" target="_blank"><i class="fab fa-linkedin-in"></i> Add to profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Section -->
+        <div class="row">
+            <!-- Left Column: Details -->
+            <div class="col s12 m7">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title" id="badge-name"></span>
+                        <p><strong>Issued by:</strong> <span id="issuer-name"></span></p>
+                        <h5>About</h5>
+                        <p id="badge-description"></p>
+                        <h5>Earning Criteria</h5>
+                        <p id="earning-criteria"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Skills & Verification -->
+            <div class="col s12 m5">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Acquired Skills</span>
+                        <div id="skills-list"></div>
+                    </div>
+                </div>
+                <a href="#verifyModal" class="waves-effect waves-light btn modal-trigger" style="width:100%; margin-top: 20px;">Verify</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Structure -->
+    <div id="verifyModal" class="modal">
+        <div class="modal-content">
+            <h4>Verify this Credential</h4>
+            <p><strong>Credential issued to:</strong> <span id="modal-recipient-name"></span></p>
+            <p><strong>Credential Signatory:</strong> <span id="modal-signatory"></span></p>
+            <p><strong>Date of issue:</strong> <span id="modal-issue-date"></span></p>
+            <div class="divider"></div>
+            <p><strong>Assertion ID:</strong> <br><small id="modal-assertion-id"></small></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+        </div>
+    </div>
+
+    <!-- Import Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
