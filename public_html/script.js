@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     M.Modal.init(elems);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const recipientId = urlParams.get('recipient'); // e.g., Alice_Smith
+    const recipientId = urlParams.get('id'); // e.g., f47ac10b
 
     if (recipientId) {
         const repoName = 'certificates';

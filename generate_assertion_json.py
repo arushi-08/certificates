@@ -1,5 +1,7 @@
 import json
+import csv
 from datetime import datetime
+import uuid
 
 from generate_certificate import create_directory_if_not_exists
 
@@ -37,24 +39,47 @@ def create_assertion(recipient_name, recipient_identity, badge_name, badge_id, i
     return assertion
 
 def main():
-    # badge_name = "Elevate Your Potential With NLP"
     badge_name = 'Test Badge Name'
-    recipient_identity="1001"
-    recipient_name = "Alice Smith"
-    # Example usage
-    assertion = create_assertion(
-        recipient_name=recipient_name,
-        recipient_identity=recipient_identity,
-        badge_name=badge_name,
-        badge_id="https://nlplimited.com/badgeClasses/123",
-        issuer_id="https://nlplimited.com/profiles/issuer",
-        image_url=f"https://nlplimited.com/certificates/{recipient_identity}_badge.png",
-        assertion_id="https://nlplimited.com/assertions/uuid"
-    )
+    input_file = 'recipients.csv'
+    output_csv = 'recipients_processed.csv'
+    
+    # Read recipients and generate UUIDs
+    with open(input_file, mode='r', newline='') as infile, \
+         open(output_csv, mode='w', newline='') as outfile:
+        
+        reader = csv.DictReader(infile)
+        fieldnames = reader.fieldnames + ['uuid']
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
 
-    create_directory_if_not_exists(f'public_html/assertions/{badge_name}')
-    with open(f'public_html/assertions/{badge_name}/{recipient_name}.json', 'w') as f:
-        json.dump(assertion, f, indent=2)
+        for row in reader:
+            # Generate a new short UUID
+            recipient_uuid = str(uuid.uuid4())[:8]
+            row['uuid'] = recipient_uuid
+            writer.writerow(row)
+
+            # --- Create Assertion ---
+            recipient_name = row['name']
+            recipient_identity = row['identity']
+            assertion_id = f"https://nlplimited.com/assertions/{uuid.uuid4()}"
+
+            assertion = create_assertion(
+                recipient_name=recipient_name,
+                recipient_identity=recipient_identity,
+                badge_name=badge_name,
+                badge_id="https://nlplimited.com/badgeClasses/123",
+                issuer_id="https://nlplimited.com/profiles/issuer",
+                image_url=f"https://nlplimited.com/certificates/{recipient_uuid}_badge.png",
+                assertion_id=assertion_id
+            )
+
+            output_dir = f'public_html/assertions/{badge_name}'
+            create_directory_if_not_exists(output_dir)
+            
+            output_filename = f'{output_dir}/{recipient_uuid}.json'
+            with open(output_filename, 'w') as f:
+                json.dump(assertion, f, indent=2)
+            print(f"Generated assertion for {recipient_name} -> {output_filename}")
 
 
 if __name__ == '__main__':

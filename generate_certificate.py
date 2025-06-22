@@ -16,7 +16,7 @@ FONT_PATH = 'PinyonScript-Regular.ttf'  # Use your font file
 FONT_SIZE = 55
 badge_name = "Test"
 OUTPUT_DIR = f'public_html/certificates/{badge_name}'
-CSV_PATH = 'recipients.csv'
+CSV_PATH = 'recipients_processed.csv'
 
 pdfmetrics.registerFont(TTFont('PinyonScript', FONT_PATH))
 
@@ -60,6 +60,7 @@ def main():
 
     for idx, row in df.iterrows():
         name = row['name']
+        uuid = row['uuid']
        
         # Create a PDF in memory with the name
         packet = io.BytesIO()
@@ -82,7 +83,7 @@ def main():
 
         # Save the result
         create_directory_if_not_exists(OUTPUT_DIR)
-        output_path = f"{OUTPUT_DIR}/{name.replace(' ', '_')}_certificate.pdf"
+        output_path = f"{OUTPUT_DIR}/{uuid}_certificate.pdf"
         with open(output_path, "wb") as outputStream:
             output.write(outputStream)
         
@@ -90,7 +91,7 @@ def main():
         images = convert_from_path(output_path, first_page=0, last_page=1)
         if images:
             # Save the image to a file
-            png_output_path = f"{OUTPUT_DIR}/{name.replace(' ', '_')}_certificate.png"
+            png_output_path = f"{OUTPUT_DIR}/{uuid}_certificate.png"
             images[0].save(png_output_path, 'PNG')
 
 
