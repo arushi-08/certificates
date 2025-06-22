@@ -15,7 +15,7 @@ TEMPLATE_PATH = 'template.pdf'
 FONT_PATH = 'PinyonScript-Regular.ttf'  # Use your font file
 FONT_SIZE = 55
 badge_name = "Test"
-OUTPUT_DIR = f'certificates/{badge_name}'
+OUTPUT_DIR = f'public_html/certificates/{badge_name}'
 CSV_PATH = 'recipients.csv'
 
 pdfmetrics.registerFont(TTFont('PinyonScript', FONT_PATH))

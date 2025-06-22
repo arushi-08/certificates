@@ -40,9 +40,10 @@ def main():
     # badge_name = "Elevate Your Potential With NLP"
     badge_name = 'Test Badge Name'
     recipient_identity="1001"
+    recipient_name = "Alice Smith"
     # Example usage
     assertion = create_assertion(
-        recipient_name="Alice Smith",
+        recipient_name=recipient_name,
         recipient_identity=recipient_identity,
         badge_name=badge_name,
         badge_id="https://nlplimited.com/badgeClasses/123",
@@ -51,8 +52,8 @@ def main():
         assertion_id="https://nlplimited.com/assertions/uuid"
     )
 
-    create_directory_if_not_exists(f'assertions/{badge_name}')
-    with open(f'assertions/{badge_name}/Alice_Smith.json', 'w') as f:
+    create_directory_if_not_exists(f'public_html/assertions/{badge_name}')
+    with open(f'public_html/assertions/{badge_name}/{recipient_name}.json', 'w') as f:
         json.dump(assertion, f, indent=2)
 
 
