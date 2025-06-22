@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const recipientId = urlParams.get('recipient'); // e.g., Alice_Smith
 
     if (recipientId) {
-        const base = window.location.origin;
-        const assertionUrl = `${base}/assertions/Test Badge Name/${recipientId}.json`;
-        const certificatePdfUrl = `${base}/certificates/Test/${recipientId}_certificate.pdf`;
-        const certificateImageUrl = `${base}/certificates/Test/${recipientId}_certificate.png`;
+        const repoName = 'certificates';
+        const assertionUrl = `/${repoName}/public_html/assertions/Test Badge Name/${recipientId}.json`;
+        const certificatePdfUrl = `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.pdf`;
+        const certificateImageUrl = `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.png`;
 
         fetch(assertionUrl)
             .then(response => {
