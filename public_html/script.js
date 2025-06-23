@@ -4,13 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
     M.Modal.init(elems);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const recipientId = urlParams.get('id'); // e.g., f47ac10b
+    const recipientId = urlParams.get('id');
+
+    // --- Path Configuration ---
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const repoName = 'certificates'; 
+
+    const paths = {
+        local: {
+            assertion: `assertions/Test Badge Name/${recipientId}.json`,
+            certificatePdf: `certificates/Test/${recipientId}_certificate.pdf`,
+            certificateImage: `certificates/Test/${recipientId}_certificate.png`
+        },
+        github: {
+            assertion: `/${repoName}/public_html/assertions/Test Badge Name/${recipientId}.json`,
+            certificatePdf: `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.pdf`,
+            certificateImage: `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.png`
+        }
+    };
+
+    const config = isLocal ? paths.local : paths.github;
+    // --- End Path Configuration ---
 
     if (recipientId) {
-        const repoName = 'certificates';
-        const assertionUrl = `/${repoName}/public_html/assertions/Test Badge Name/${recipientId}.json`;
-        const certificatePdfUrl = `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.pdf`;
-        const certificateImageUrl = `/${repoName}/public_html/certificates/Test/${recipientId}_certificate.png`;
+        const assertionUrl = config.assertion;
+        const certificatePdfUrl = config.certificatePdf;
+        const certificateImageUrl = config.certificateImage;
 
         fetch(assertionUrl)
             .then(response => {
@@ -20,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                document.getElementById('recipient-name').innerHTML = `Certificate Issued to <strong>${data.recipient.identity}</strong>`;
+                //                document.getElementById('recipient-name').innerHTML = `Certificate Issued to <strong>${data.recipient.name}</strong>`;
                 document.getElementById('badge-name').textContent = data.badge.name;
                 document.getElementById('issuer-name').textContent = data.badge.issuer.name;
                 
@@ -29,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('earning-criteria').innerHTML = data.badge.criteria.narrative;
                 
                 const issuedOnDate = new Date(data.issuedOn).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                document.getElementById('issue-date').textContent = issuedOnDate;
                 
                 document.getElementById('certificate-image').src = certificateImageUrl;
 
